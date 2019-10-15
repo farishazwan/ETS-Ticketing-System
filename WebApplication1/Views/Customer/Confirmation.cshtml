@@ -1,0 +1,110 @@
+﻿@model WebApplication1.Models.Ticket
+
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<!-- Banner -->
+<section id="banner1">
+    <div class="inner">
+        <header>
+            <h1>TICKET PURCHASING</h1>
+        </header>
+    </div>
+</section>
+
+<section id="main" class="wrapper">
+    <div class="inner">
+        <h2><center>Confirmation Page</center></h2>
+
+        <fieldset>
+            <h3>Personal Information</h3>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <table class="table table-condensed table-hover">
+
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                IC/Passport Number
+                            </th>
+                            <th>
+                                Email Address
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>@Model.Name</td>
+                            <td>@Model.ICNum</td>
+                            <td>@Model.EmailAddress</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </fieldset>
+
+        <h3>Ticket Details</h3>
+        <br />
+        <div class="form-group">
+            <div class="col-md-12">
+                <table class="table table-condensed table-hover">
+
+                    <tr>
+                        <th>
+                            Current Location
+                        </th>
+                        <th>
+                            Destination
+                        </th>
+                        <th>
+                            Type Of Trip
+                        </th>
+                        <th>
+                            Type Of Passenger
+                        </th>
+                        <th>
+                            Number of Tikcet
+                        </th>
+                        <th>
+                            Total Amount
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>@ViewBag.FromDestination</td>
+                        <td>@ViewBag.ToDestination</td>
+                        <td>@ViewBag.TypeOfTrip</td>
+                        <td>@ViewBag.TypeOfUser</td>
+                        <td>@Model.NumOfTicket</td>
+                        <td>RM @Model.TotalPrice.ToString("0.00")</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+@using (Html.BeginForm("Payment", "Customer", FormMethod.Post))
+{
+    @Html.TextBoxFor(x => x.Name, new { Value = Model.Name, Type = "hidden" })
+    @Html.TextBoxFor(x => x.ICNum, new { Value = Model.ICNum, Type = "hidden" })
+    @Html.TextBoxFor(x => x.EmailAddress, new { Value = Model.EmailAddress, Type = "hidden" })
+    @Html.TextBoxFor(x => x.FromDestination, new { Value = Model.FromDestination, Type = "hidden" })
+    @Html.TextBoxFor(x => x.ToDestination, new { Value = Model.ToDestination, Type = "hidden" })
+    @Html.TextBoxFor(x => x.TypeOfUser, new { Value = Model.TypeOfUser, Type = "hidden" })
+    @Html.TextBoxFor(x => x.NumOfWay, new { Value = Model.NumOfWay, Type = "hidden" })
+    @Html.TextBoxFor(x => x.NumOfTicket, new { Value = Model.NumOfTicket, Type = "hidden" })
+    @Html.TextBoxFor(x => x.TotalPrice, new { Value = Model.TotalPrice, Type = "hidden" })
+
+    <div style="text-align:center;">
+        <input type="submit" value="Submit" class="button special" />
+        <a href="@Url.Action("PurchaseTicket", "Customer")" class="button special">Cancel</a>
+    </div>
+}
+

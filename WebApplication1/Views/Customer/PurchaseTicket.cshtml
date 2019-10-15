@@ -1,0 +1,213 @@
+﻿@model WebApplication1.Models.Ticket
+
+@{
+    ViewBag.Title = "PurchaseTicket";
+}
+
+<!-- Banner -->
+<section id="banner1">
+    <div class="inner">
+        <header>
+            <h1>TICKET PURCHASING</h1>
+        </header>
+    </div>
+</section>
+
+<section id="main" class="wrapper">
+    <div class="inner">
+        @Html.ValidationSummary()
+
+        @using (Html.BeginForm())
+        {
+            <h2><center>Purchase Form</center></h2>
+
+            <fieldset>
+                <div class="box">
+
+                    <div class="row">
+                        <div class="6u 12u$(medium)">
+
+                            <h3><center>Personal Information</center></h3>
+                            <h5> Enter your name:  @Html.TextBoxFor(x => x.Name, new { @class = "Name" })</h5>
+                            <h5> Enter your identification card/passport number: @Html.TextBoxFor(x => x.ICNum, new { @class = "Name" })</h5>
+                            <h5> Enter your email address:  @Html.TextBoxFor(x => x.EmailAddress, new { @class = "Name" })</h5>
+                        </div>
+
+                        <div class="6u 12u$(medium)">
+
+                            <h3><center>MRT Route Map </center></h3>
+                            <center><img src="~/images/mrt--corp-map.jpg" height="320" width="480" /></center>
+                        </div>
+
+                    </div>
+
+                </div>
+            </fieldset>
+
+
+            @Html.AntiForgeryToken()
+
+
+
+            <fieldset>
+                <h3><center>Ticket Details</center></h3>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <table class="table table-condensed table-hover">
+
+                            <tr>
+                                <th>
+                                    Current Location
+                                </th>
+                                <th>
+                                    Destination
+                                </th>
+                                <th>
+                                    Type Of Trip
+                                </th>
+                                <th>
+                                    Passenger Category
+                                </th>
+                                <th>
+                                    Number of Tikcet
+                                </th>
+                            </tr>
+
+
+                            <td>
+                                <div class="12u$">
+                                    <div class="select-wrapper">
+                                        @Html.DropDownListFor(x => x.FromDestination, new[] {
+                                         new SelectListItem() { Text = "[SBK01] Sungai Buloh", Value = "0"},
+                                        new SelectListItem() { Text = "[SBK02] Kampung Selamat", Value = "1"},
+                                        new SelectListItem() { Text = "[SBK04] Kwasa Damansara", Value = "2"},
+                                        new SelectListItem() { Text = "[SBK05] Kwasa Sentral", Value = "3"},
+                                        new SelectListItem() { Text = "[SBK06] Kota Damansara", Value = "4"},
+                                        new SelectListItem() { Text = "[SBK07] Surian", Value = "5"},
+                                        new SelectListItem() { Text = "[SBK08] Mutiara Damansara", Value = "6"},
+                                        new SelectListItem() { Text = "[SBK09] Bandar Utama", Value = "7"},
+                                        new SelectListItem() { Text = "[SBK10] Taman Tun Dr. Ismail", Value = "8"},
+                                        new SelectListItem() { Text = "[SBK12] Phileo Damansara", Value = "9"},
+                                        new SelectListItem() { Text = "[SBK13] Pusat Bandar Damansara", Value = "10"},
+                                       new SelectListItem() { Text = "[SBK14] Semantan", Value = "11"},
+                                       new SelectListItem() { Text = "[SBK15] Muzium Negara", Value = "12"},
+                                       new SelectListItem() { Text = "[SBK16] Pasar Seni", Value = "13"},
+                                       new SelectListItem() { Text = "[SBK17] Merdeka", Value = "14"},
+                                       new SelectListItem() { Text = "[SBK18A] Bukit Bintang", Value = "15"},
+                                       new SelectListItem() { Text = "[SBK20] Tun Razak Exchange", Value = "16"},
+                                       new SelectListItem() { Text = "[SBK21] Cochrane", Value = "17"},
+                                       new SelectListItem() { Text = "[SBK22] Maluri", Value = "18"},
+                                       new SelectListItem() { Text = "[SBK23] Taman Pertama", Value = "19"},
+                                       new SelectListItem() { Text = "[SBK24] Taman Midah", Value = "20"},
+                                       new SelectListItem() { Text = "[SBK25] Taman Mutiara", Value = "21"},
+                                       new SelectListItem() { Text = "[SBK26] Taman Connaught", Value = "22"},
+                                       new SelectListItem() { Text = "[SBK27] Taman Suntex", Value = "23"},
+                                       new SelectListItem() { Text = "[SBK28] Sri Raya", Value = "24"},
+                                       new SelectListItem() { Text = "[SBK29] Bandar Tun Hussein Onn", Value = "25"},
+                                       new SelectListItem() { Text = "[SBK30] Batu Sebelas Cheras", Value = "26"},
+                                       new SelectListItem() { Text = "[SBK31] Bukit Dukung", Value = "27"},
+                                       new SelectListItem() { Text = "[SBK33] Sungai Jernih", Value = "28"},
+                                       new SelectListItem() { Text = "[SBK34] Stadium Kajang", Value = "29"},
+                                       new SelectListItem() { Text = "[SBK35] Kajang", Value = "30"},
+                                        }, "-Location -", new { @class = "FromDestination" })
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="12u$">
+                                    <div class="select-wrapper">
+                                        @Html.DropDownListFor(x => x.ToDestination, new[] {
+                                        new SelectListItem() { Text = "[SBK01] Sungai Buloh", Value = "0"},
+                                        new SelectListItem() { Text = "[SBK02] Kampung Selamat", Value = "1"},
+                                        new SelectListItem() { Text = "[SBK04] Kwasa Damansara", Value = "2"},
+                                        new SelectListItem() { Text = "[SBK05] Kwasa Sentral", Value = "3"},
+                                        new SelectListItem() { Text = "[SBK06] Kota Damansara", Value = "4"},
+                                        new SelectListItem() { Text = "[SBK07] Surian", Value = "5"},
+                                        new SelectListItem() { Text = "[SBK08] Mutiara Damansara", Value = "6"},
+                                        new SelectListItem() { Text = "[SBK09] Bandar Utama", Value = "7"},
+                                        new SelectListItem() { Text = "[SBK10] Taman Tun Dr. Ismail", Value = "8"},
+                                        new SelectListItem() { Text = "[SBK12] Phileo Damansara", Value = "9"},
+                                        new SelectListItem() { Text = "[SBK13] Pusat Bandar Damansara", Value = "10"},
+                                       new SelectListItem() { Text = "[SBK14] Semantan", Value = "11"},
+                                       new SelectListItem() { Text = "[SBK15] Muzium Negara", Value = "12"},
+                                       new SelectListItem() { Text = "[SBK16] Pasar Seni", Value = "13"},
+                                       new SelectListItem() { Text = "[SBK17] Merdeka", Value = "14"},
+                                       new SelectListItem() { Text = "[SBK18A] Bukit Bintang", Value = "15"},
+                                       new SelectListItem() { Text = "[SBK20] Tun Razak Exchange", Value = "16"},
+                                       new SelectListItem() { Text = "[SBK21] Cochrane", Value = "17"},
+                                       new SelectListItem() { Text = "[SBK22] Maluri", Value = "18"},
+                                       new SelectListItem() { Text = "[SBK23] Taman Pertama", Value = "19"},
+                                       new SelectListItem() { Text = "[SBK24] Taman Midah", Value = "20"},
+                                       new SelectListItem() { Text = "[SBK25] Taman Mutiara", Value = "21"},
+                                       new SelectListItem() { Text = "[SBK26] Taman Connaught", Value = "22"},
+                                       new SelectListItem() { Text = "[SBK27] Taman Suntex", Value = "23"},
+                                       new SelectListItem() { Text = "[SBK28] Sri Raya", Value = "24"},
+                                       new SelectListItem() { Text = "[SBK29] Bandar Tun Hussein Onn", Value = "25"},
+                                       new SelectListItem() { Text = "[SBK30] Batu Sebelas Cheras", Value = "26"},
+                                       new SelectListItem() { Text = "[SBK31] Bukit Dukung", Value = "27"},
+                                       new SelectListItem() { Text = "[SBK33] Sungai Jernih", Value = "28"},
+                                       new SelectListItem() { Text = "[SBK34] Stadium Kajang", Value = "29"},
+                                       new SelectListItem() { Text = "[SBK35] Kajang", Value = "30"},
+                                       }, "-Destination-", new { @class = "ToDestination" })
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="12u$">
+                                    <div class="select-wrapper">
+                                        @Html.DropDownListFor(x => x.NumOfWay, new[] {
+                                        new SelectListItem(){Text="One-Way Trip", Value= "1"},
+                                        new SelectListItem(){Text="Return Trip", Value = "2"}
+                                        }, "-Trip Type-", new { @class = "NumOfWay" })
+                                    </div>
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="12u$">
+                                    <div class="select-wrapper">
+                                        @Html.DropDownListFor(x => x.TypeOfUser, new[] {
+                                    new SelectListItem(){Text="Non-privileged", Value= "1"},
+                                    new SelectListItem(){Text="Senior citizen", Value = "2"},
+                                    new SelectListItem(){Text="Student", Value = "3"},
+                                    new SelectListItem(){Text="Disabled", Value = "4"}
+                                    }, "-Category-", new { @class = "TypeOfUser" })
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                @Html.EditorFor(x => x.NumOfTicket, new { @class = "NumOfTicket" })
+                            </td>
+
+                        </table>
+                        <br />
+                    </div>
+                </div>
+
+            </fieldset>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 text-center">
+                    <p>
+                        <center>
+                            <input type="submit" value="Submit" class="button special" />
+                            <input type="reset" value="Reset" class="button special" />
+                        </center>
+
+                    </p>
+                </div>
+            </div>
+
+        }
+    </div>
+</section>
+
+

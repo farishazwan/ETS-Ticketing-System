@@ -1,0 +1,160 @@
+﻿@model WebApplication1.Models.Ticket
+
+
+@{
+    ViewBag.Title = "Payment";
+}
+
+<!-- Banner -->
+<section id="banner1">
+    <div class="inner">
+        <header>
+            <h1>TICKET PURCHASING</h1>
+        </header>
+    </div>
+</section>
+
+@{
+    DateTime datetime = DateTime.Now;
+    try
+    {
+        WebMail.SmtpServer = "smtp.gmail.com";
+        WebMail.SmtpPort = 587;
+        WebMail.EnableSsl = true;
+        WebMail.UserName = "foodbear.tempemail";
+        WebMail.Password = "Food.bear1";
+        WebMail.From = "foodbear.tempemail@gmail.com";
+        WebMail.Send(Model.EmailAddress, "Thank You For Purchasing Ticket Through MRT Ticketing Sytem",
+
+            "Here is the details of the transaction made by you recently in MRT Ticketing System<br/><br/>" +
+            "Transation Date:" + datetime.ToString("dddd, dd MMMM yyyy hh:mm tt") + "<br/>" +
+            "<h2>Personal Details</h2>" +
+            "<table border='1'><tr><th>Name</th><th>IC / Passport Number</th><th>Email Address" +
+            "</th></tr><tr><td>" + Model.Name + "</td><td>" + Model.ICNum + "</td><td>" +
+            Model.EmailAddress + "</td></tr></table>" +
+            "<h2>Ticket Details</h2>" +
+
+
+           "<table border='1'>" +
+
+               " <tr><th>Current Location</th><th>Destination</th><th>Type Of Trip</th><th>Type Of Passenger</th><th>Number of Tikcet</th><th>Total Amount</th> </tr>" +
+               "<tr><td>" + ViewBag.FromDestination + "</td><td>" + ViewBag.ToDestination + "</td><td>"
+               + ViewBag.TypeOfTrip + "</td><td>" + ViewBag.TypeOfUser + "</td><td>" + Model.NumOfTicket +
+               "</td><td>RM" + Model.TotalPrice.ToString("0.00") + "</td></tr></table></div></div>"
+
+
+
+    );
+
+        @:
+<section id="main" class="wrapper">
+    <div class="inner">
+        <div class="box">
+            <h2><center>Successful</center></h2>
+            <h2><center>Thank you, @Model.Name! Your ticket purchasing is successful.</center></h2>
+            <h2><center>Please check your email for the ticket details.</center></h2>
+
+
+            <h2><center>Transaction Information</center></h2>
+
+
+            <h3>Personal Information</h3>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <table class="table table-condensed table-hover">
+
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                IC/Passport Number
+                            </th>
+                            <th>
+                                Email Address
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>@Model.Name</td>
+                            <td>@Model.ICNum</td>
+                            <td>@Model.EmailAddress</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <h3>Ticket Details</h3>
+            <br />
+            <div class="form-group">
+                <div class="col-md-12">
+                    <table class="table table-condensed table-hover">
+
+                        <tr>
+                            <th>
+                                Current Location
+                            </th>
+                            <th>
+                                Destination
+                            </th>
+                            <th>
+                                Type Of Trip
+                            </th>
+                            <th>
+                                Type Of Passenger
+                            </th>
+                            <th>
+                                Number of Tikcet
+                            </th>
+                            <th>
+                                Total Amount
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>@ViewBag.FromDestination</td>
+                            <td>@ViewBag.ToDestination</td>
+                            <td>@ViewBag.TypeOfTrip</td>
+                            <td>@ViewBag.TypeOfUser</td>
+                            <td>@Model.NumOfTicket</td>
+                            <td>RM @Model.TotalPrice.ToString("0.00")</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;">
+        <a href="@Url.Action("Index", "Customer")" class="button special">Done</a>
+    </div>
+</section>
+
+
+
+    }
+    catch (Exception)
+    {
+
+        @:
+
+
+
+
+        <section id="main" class="wrapper">
+            <div class="inner">
+                <div class="box">
+                    <h2><center>Transaction not successful</center></h2>
+                    <h4><center>Sorry @Model.Name! - we couldn't send the email to confirm your purchase. Please check your internet connectivity</center></h4>
+                </div>
+
+            </div>
+
+            <div style="text-align:center;">
+                <a href="@Url.Action("PurchaseTicket", "Customer")" class="button special">Back</a>
+            </div>
+
+        </section>
+
+    }
+
+}

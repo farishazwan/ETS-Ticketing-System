@@ -1,0 +1,95 @@
+﻿@model IEnumerable<WebApplication1.Models.Ticket>
+
+@{
+    ViewBag.Title = "History";
+}
+
+<!-- Banner -->
+<section id="banner1">
+    <div class="inner">
+        <header>
+            <h1>PURCHASE HISTORY</h1>
+        </header>
+    </div>
+</section>
+
+<section id="main" class="wrapper">
+    <div class="inner">
+
+        <h2><center>TRANSACTION HISTORY</center></h2>
+
+        <table class="table" border="1">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ICNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FromDestination)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ToDestination)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeOfUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumOfTicket)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumOfWay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DatePurchased)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ICNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromDestination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToDestination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeOfUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfTicket)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfWay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatePurchased)
+                </td>
+
+            </tr>
+            }
+
+
+        </table>
+    </div>
+</section>

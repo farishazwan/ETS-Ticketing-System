@@ -1,0 +1,90 @@
+﻿@model IEnumerable<WebApplication1.Models.User>
+
+
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<style>
+    table, th, td {
+        border: 10px solid grey;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+    }
+</style>
+
+<!-- Banner -->
+<section id="banner1">
+    <div class="inner">
+        <header>
+            <h1>PROFILE</h1>
+        </header>
+    </div>
+</section>
+
+<section id="main" class="wrapper">
+    <div class="inner">
+
+        <h2><center>Profile<center></h2>
+        <hr />
+        <div class="box">
+            <div class="col-md-offset-2 col-md-10 text-center">
+                <center>
+                    <table class="table" style="width:50%">
+
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                            </tr>
+                            <tr>
+                                <th> @Html.DisplayNameFor(model => model.ICNum)</th>
+                                <td>@Html.DisplayFor(modelItem => item.ICNum)</td>
+                            </tr>
+                            <tr>
+                                <th>  @Html.DisplayNameFor(model => model.PhoneNum)</th>
+                                <td>@Html.DisplayFor(modelItem => item.PhoneNum) </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Address) </th>
+                                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                            </tr>
+
+
+
+                            @Html.ActionLink("Edit Profile", "EditProfile", "Admin", new { id = item.UserId }, new { @class = "button special" })
+                            <br />
+                            <br />
+
+                            <dl>
+                                <dd>
+                                    <br />
+                                    <img src="~/ProfileImg/@item.profileImg" width="200" />
+                                    <br />
+                                </dd>
+                            </dl>
+
+                        }
+
+                    </table>
+                </center>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
