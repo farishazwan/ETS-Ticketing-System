@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -39,16 +39,16 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                string password = user.Password;
+                /*string password = user.Password;
             PBKDF2Hash PwdHash = new PBKDF2Hash(password);
-            string passwordhash = PwdHash.HashedPassword;
+            string passwordhash = PwdHash.HashedPassword;*/
             bool enabled = true;
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStrMrtTicketing"].ConnectionString);
             string sql = @"INSERT INTO UserAccounts VALUES(@EmailAddress, @PasswordHash, @Role, @Enabled)";
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@EmailAddress",user.EmailAddress);
-            cmd.Parameters.AddWithValue("@PasswordHash", passwordhash);
+            cmd.Parameters.AddWithValue("@PasswordHash", user.Password);
             cmd.Parameters.AddWithValue("@Role", "user");
             cmd.Parameters.AddWithValue("@Enabled", enabled);
 
@@ -97,26 +97,22 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-            string sql = "SELECT * FROM UserAccounts WHERE EmailAddress=@EmailAddress";
+            string sql = "SELECT * FROM UserAccounts WHERE EmailAddress=@EmailAddress AND PasswordHash=@Password";
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStrMrtTicketing"].ConnectionString);
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
+            cmd.Parameters.AddWithValue("@Password", user.Password);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
 
                 if (dt.Rows.Count > 0)
                 {
-                    Object objpasswordhash = dt.Rows[0]["PasswordHash"];
                     Object objrole = dt.Rows[0]["Role"];
                     Object objenabled = dt.Rows[0]["Enabled"];
-                    string password = user.Password;
-                    string storedpasswordhash = objpasswordhash.ToString();
-                    PBKDF2Hash PwdHash = new PBKDF2Hash(password, storedpasswordhash);
-                    bool passwordcheck = PwdHash.PasswordCheck;
                     bool enabled = Convert.ToBoolean(objenabled);
 
-                    if (passwordcheck == true && enabled == true)
+                    if (enabled == true)
                     {
                         System.Web.HttpContext.Current.Session["username"]= user.EmailAddress;
                         System.Web.HttpContext.Current.Session["role"] = objrole;
