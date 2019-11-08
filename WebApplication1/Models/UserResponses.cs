@@ -74,8 +74,8 @@ namespace WebApplication1.Models
         public string Password { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage = "Confirmation Password is required.")]
-        [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
+        [Required(ErrorMessage = "Confirmation Password is required")]
+        [Compare("Password", ErrorMessage = "Password and Confirmation Password must match")]
         public string ConfirmPassword { get; set; }
 
         public string Role { get; set; }
