@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.Process;
@@ -142,6 +143,67 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPassword fp)
+        {
+            if (ModelState.IsValid)
+            {
+                string sql = "SELECT * FROM UserAccounts WHERE EmailAddress=@EmailAddress";
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStrMrtTicketing"].ConnectionString);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@EmailAddress", fp.EmailAddress);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    Object objpass = dt.Rows[0]["PasswordHash"];
+
+                    string password = objpass.ToString();
+
+
+                    DateTime datetime = DateTime.Now;
+                    try { 
+                        WebMail.SmtpServer = "smtp.gmail.com";
+                        WebMail.SmtpPort = 587;
+                        WebMail.EnableSsl = true;
+                        WebMail.UserName = "foodbear.tempemail";
+                        WebMail.Password = "Food.bear1";
+                        WebMail.From = "foodbear.tempemail@gmail.com";
+                        WebMail.Send(fp.EmailAddress, "Your password for the MRT Ticketing System", "Your password is: " + password);
+                    }
+                    catch(Exception)
+                    {
+                        ViewBag.Text = "We couldn't send the password. Please check your internet connectivity";
+                        return View();
+                    }
+                    return RedirectToAction("PasswordScc", "Home");
+
+                }
+
+            }
+            else
+            {
+                ViewBag.Text = "The email you entered is not registered in the database.";
+                return View();
+            }
+            ViewBag.Text = "You're email address or/and password is incorrect";
+            return View();
+
+        }
+            
+        [HttpGet]
+        public ActionResult PasswordScc()
+        {
+           
+            return View();
+        }
           
        
         //end of controller
