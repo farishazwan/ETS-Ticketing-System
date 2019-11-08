@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -18,12 +18,13 @@
             <a href="@Url.Action("Index", "")" class="logo"><img src="~/images/logo.png" /></a>
             <nav id="nav">
                 <a href="@Url.Action("Index", "Customer")">Home</a>
+                <a href="@Url.Action("viewBulletin", "Customer")">Bulletin</a>
                 <a href="@Url.Action("PurchaseTicket", "Customer")">Buy Ticket</a>
                 <a href="@Url.Action("History", "Customer")">History</a>
                 <a href="@Url.Action("ViewProfile", "Customer")">Profile</a>
                 <a href="@Url.Action("Logout", "Customer")">Logout</a>&nbsp;&nbsp;
-               
-               
+
+
                 <b> Welcome,@HttpContext.Current.Session["username"]</b>!
 
             </nav>
