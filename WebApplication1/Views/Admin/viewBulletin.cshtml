@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebApplication1.Models.Bulletin>
+
+<section id="banner">
+    <div class="inner">
+        <header>
+            <h1>WELCOME TO MRT TICKETING SYSTEM</h1>
+        </header>
+
+        <footer>
+            <a href="@Url.Action("PurchaseTicket", "Customer")" class="button">PURCHASE TICKET</a>
+        </footer>
+    </div>
+</section>
+
+
+<!-- Three -->
+<section id="three" class="wrapper align-center">
+    <div class="inner">
+        <p>
+            @Html.ActionLink("Add Bulletin", "CreateBulletin")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.newsTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.newsDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.newsDate)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.newsTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.newsDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.newsDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteBulletin", new { id = item.newsID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</section>
+
+
+
