@@ -1,0 +1,58 @@
+﻿@model WebApplication1.Models.UserAccount
+
+@{
+    /**/
+
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_homeLayout.cshtml";
+}
+
+<!-- Banner -->
+<section id="banner1">
+    <div class="inner">
+        <header>
+            <h1>REGISTER ACCOUNT</h1>
+        </header>
+    </div>
+</section>
+
+<section id="main" class="wrapper">
+    <div class="inner">
+
+        @Html.ValidationSummary()
+
+        @using (Html.BeginForm())
+        {
+            <h2><center>Registration Form<center></h2>
+
+            <fieldset>
+
+                <div class="box">
+                    <div class="col-md-offset-2 col-md-10 text-center">
+                        <center>
+                            <h3>Please fill in all the details</h3>
+                            <h5> Enter your email address:  @Html.TextBoxFor(x => x.EmailAddress, new { style = "width:500px;" })</h5>
+                            <h5> Enter your password: @Html.PasswordFor(x => x.Password, new { style = "width:500px;" })</h5>
+                            <h5> Confirm your password:  @Html.PasswordFor(x => x.ConfirmPassword, new { style = "width:500px;" })</h5>
+
+                        </center>
+                        </div>
+                    </div>
+            </fieldset>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 text-center">
+                    <p>
+                        <center>
+                            <input type="submit" value="Submit" class="button special" />
+                            <input type="reset" value="Reset" class="button special" />
+                        </center>
+
+                    </p>
+                </div>
+            </div>
+
+        }
+    </div>
+</section>
+

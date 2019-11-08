@@ -1,0 +1,54 @@
+﻿@model WebApplication1.Models.Ticket
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Banner -->
+<section id="banner">
+    <div class="inner">
+        <header>
+            <h1>WELCOME TO ETS KOMUTER TICKETING SYSTEM</h1>
+        </header>
+
+        <footer>
+            <a href="@Url.Action("PurchaseTicket", "Customer")" class="button">PURCHASE TICKET</a>
+          
+        </footer>
+    </div>
+</section>
+
+
+<!-- Three -->
+<section id="three" class="wrapper align-center">
+    <div class="inner">
+        <div class="flex flex-2">
+            <article>
+                <div class="image round">
+                    <img src="~/images/rsz_info.png" />
+                </div>
+                <header>
+                    <h3>About</h3>
+                </header>
+                <p>Need to know more about ETS?<br />Information about the stations and ETS can be found by clicking<br /> on the "Learn More" below</p>
+                <footer>
+                    <a href="@Url.Action("About", "Customer")" class="button">Learn More</a>
+                </footer>
+            </article>
+            <article>
+                <div class="image round">
+                    <img src="~/images/rsz_faq.png" />
+                </div>
+                <header>
+                    <h3>Frequently Asked Questions (FAQ)<br /></h3>
+                </header>
+                <p>Need to know more about travel info?<br />Information about the routes can be found by clicking<br /> on the "Learn More" below</p>
+
+                <footer>
+                    <a href="@Url.Action("FAQ", "Customer")" class="button">Learn More</a>
+                </footer>
+            </article>
+        </div>
+    </div>
+</section>
+

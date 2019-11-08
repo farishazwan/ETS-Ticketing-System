@@ -1,0 +1,41 @@
+﻿@model WebApplication1.Models.UserAccount
+
+@{
+    ViewBag.Title = "RegisterScc";
+    Layout = "~/Views/Shared/_homeLayout.cshtml";
+}
+<!-- Banner -->
+<section id="banner1">
+    <div class="inner">
+        <header>
+            <h1>REGISTER ACCOUNT</h1>
+        </header>
+    </div>
+</section>
+
+<section id="main" class="wrapper">
+    <div class="inner">
+
+        <h2><center>Registration Status<center></h2>
+
+        <div class="box">
+            <div class="col-md-offset-2 col-md-10 text-center">
+                <center>  @ViewBag.Text</center>  
+            </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 text-center">
+                    <p>
+                        <center>
+                            <a href="@Url.Action("Login", "")" class="button special">Login</a>
+                        </center>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+</section>
+
+
+
