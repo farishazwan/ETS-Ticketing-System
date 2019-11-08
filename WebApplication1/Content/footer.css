@@ -1,0 +1,46 @@
+﻿#footer {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background: #2e2e2e;
+    text-align: left;
+}
+
+    #footer h3 {
+        color: #FFF;
+        margin-bottom: 2em !important;
+    }
+
+    #footer label {
+        text-align: left;
+        color: #FFF;
+    }
+
+    #footer .copyright {
+        color: white;
+        font-size: 0.8em;
+        margin: 0 0 2em 0;
+        padding: 0;
+    }
+
+        #footer .copyright a {
+            color: white;
+            text-decoration: none;
+        }
+
+            #footer .copyright a:hover {
+                color: #FFF;
+            }
+
+@media screen and (max-width: 980px) {
+
+    #footer {
+        padding: 4em 0;
+    }
+}
+
+@media screen and (max-width: 736px) {
+
+    #footer {
+        padding: 3em 0;
+    }
+}
