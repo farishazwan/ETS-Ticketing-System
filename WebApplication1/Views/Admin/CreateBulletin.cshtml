@@ -1,0 +1,61 @@
+﻿@model WebApplication1.Models.Bulletin
+
+<section id="banner">
+    <div class="inner">
+        <header>
+            <h1>WELCOME TO MRT TICKETING SYSTEM</h1>
+        </header>
+
+        <footer>
+            <a href="@Url.Action("PurchaseTicket", "Customer")" class="button">PURCHASE TICKET</a>
+        </footer>
+    </div>
+</section>
+
+
+<!-- Three -->
+<section id="three" class="wrapper align-center">
+    <div class="inner">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Bulletin</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.newsTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.newsTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.newsTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.newsDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.newsDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.newsDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+            <br />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="button special" />
+                </div>
+            </div>
+        </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to Bulletin", "viewBulletin")
+        </div>
+    </div>
+</section>
+
+
+
