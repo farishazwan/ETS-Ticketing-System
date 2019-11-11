@@ -4,7 +4,6 @@
     ViewBag.Title = "ViewUser";
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
-
 <!-- Banner -->
 <section id="banner1">
     <div class="inner">
@@ -13,13 +12,24 @@
         </header>
     </div>
 </section>
-
 <div class="box">
     <div class="col-md-offset-2 col-md-10 text-center">
         <center>
-            <p>@Html.ActionLink("Create New", "CreateUser", null,  new { @class = "button special" })
-                
+
+            @using (Html.BeginForm("ViewUser", "Admin", FormMethod.Get))
+            {
+                <p>
+                    <h5> Search by Email:  @Html.TextBox("search") <input type="submit" value="Search" /></h5>
+                </p>
+            }
+            </br>
+            <p>
+                @Html.ActionLink("Create New", "CreateUser", null, new { @class = "button special" })
+
             </p>
+
+
+
             <table class="table">
                 <tr>
                     <th>
@@ -36,7 +46,6 @@
                     </th>
                     <th></th>
                 </tr>
-
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -59,7 +68,7 @@
                         </td>
                     </tr>
                 }
-
             </table>
-            </center>
-</div></div>
+        </center>
+    </div>
+</div>
