@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -259,6 +259,116 @@ namespace WebApplication1.Controllers
                 return View();
             }
 
+        }
+
+        public ActionResult viewBulletin()
+        {
+            if (System.Web.HttpContext.Current.Session["username"] != null)
+            {
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStrMrtTicketing"].ConnectionString);
+                String sql = "SELECT * FROM Bulletin";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                var model = new List<Bulletin>();
+                using (conn)
+                {
+                    conn.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        var bulletin = new Bulletin();
+                        bulletin.newsID = Convert.ToInt32(rdr["newsID"]);
+                        bulletin.newsTitle = Convert.ToString(rdr["newsTitle"]);
+                        bulletin.newsDescription = Convert.ToString(rdr["newsDescription"]);
+                        bulletin.newsDate = Convert.ToDateTime(rdr["newsDate"]);
+
+                        model.Add(bulletin);
+                    }
+
+                }
+
+                return View(model);
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+        }
+
+        [HttpGet]
+        public ActionResult CreateBulletin()
+        {
+            return View();
+        }
+
+        public ActionResult CreateBulletin(Bulletin bulletin)
+        {
+            if (System.Web.HttpContext.Current.Session["username"] != null)
+            {
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStrMrtTicketing"].ConnectionString);
+                SqlCommand cmd = new SqlCommand("spInsertBulletin", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@newsTitle", bulletin.newsTitle);
+                cmd.Parameters.AddWithValue("@newsDescription", bulletin.newsDescription);
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    return View();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+                return RedirectToAction("viewBulletin", "Admin");
+
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DeleteBulletin(int id)
+        {
+            DbAccessBulletin db = new DbAccessBulletin();
+            IEnumerable<Bulletin> dbItem = db.GetDbBulletin();
+            var result = dbItem.First(x => x.newsID == id);
+            return View(result);
+        }
+
+        [HttpPost, ActionName("DeleteBulletin")]
+        public ActionResult ConfirmDelete(int id)
+        {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.
+            ConnectionStrings["connStrMrtTicketing"].ConnectionString);
+            SqlCommand cmd = new SqlCommand("spDeleteBulletin", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@newsID", id);
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                return RedirectToAction("viewBulletin", "Admin");
+            }
+            catch
+            {
+                return View();
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
 

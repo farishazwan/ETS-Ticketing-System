@@ -19,21 +19,26 @@
 <section id="main" class="wrapper">
     <div class="inner">
 
-        @Html.ValidationSummary()
-
         @using (Html.BeginForm())
         {
             <h2><center>Login Page<center></h2>
 
             <fieldset>
+                
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                 <div class="box">
                     <div class="col-md-offset-2 col-md-10 text-center">
                         <center>
                             <h3>Please enter your login details </h3>
-                            <h5> Enter your email address:  @Html.TextBoxFor(x => x.EmailAddress, new { style = "width:500px;" })</h5>
-                            <h5> Enter your password: @Html.PasswordFor(x => x.Password, new { style = "width:500px;" })</h5>
-
+                            <h5 class="input-group">
+                                Enter your email address:  @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control", @placeholder = "Email Address", @style = "width:500px;" })
+                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger error" })
+                            </h5>
+                            <h5 class="input-group">
+                                Enter your password: @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Password", @style = "width:500px;" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger error" })
+                            </h5>
                         </center>
                     </div>
 
@@ -46,11 +51,11 @@
                                 </center>
 
                             </p>
+                            
+                            <center><p style="color: darkred">@ViewBag.Text</p></center>
 
                             <center><a href="@Url.Action("Register", "Home")">Not yet have account? Register by clicking here</a></center>
                             
-                            <center>@ViewBag.Text</center>
-
                         </div>
                     </div>
                 </div>

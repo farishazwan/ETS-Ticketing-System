@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -74,8 +74,8 @@ namespace WebApplication1.Models
         public string Password { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage = "Confirmation Password is required.")]
-        [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
+        [Required(ErrorMessage = "Confirmation Password is required")]
+        [Compare("Password", ErrorMessage = "Password and Confirmation Password must match")]
         public string ConfirmPassword { get; set; }
 
         public string Role { get; set; }
@@ -131,6 +131,30 @@ namespace WebApplication1.Models
         [Required(ErrorMessage = "Please Enter Your Image")]
         public string profileImg { get; set; }
         
+    }
+
+    public class ForgotPassword
+    {
+        [Required(ErrorMessage = "Please Enter Email Address")]
+        [EmailAddress]
+        public string EmailAddress { get; set; }
+
+        public string Password { get; set; }
+    }
+
+    public class Bulletin
+    {
+        public int newsID { get; set; }
+
+        [Display(Name = "Title")]
+        public string newsTitle { get; set; }
+
+        [Display(Name = "Description")]
+        public string newsDescription { get; set; }
+
+        [Display(Name = "Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime newsDate { get; set; }
     }
 
 }
